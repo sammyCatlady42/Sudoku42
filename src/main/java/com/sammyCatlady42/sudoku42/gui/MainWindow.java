@@ -1,5 +1,6 @@
 package com.sammyCatlady42.sudoku42.gui;
 
+import com.sammyCatlady42.sudoku42.Sudoku;
 import com.sammyCatlady42.sudoku42.exceptions.SizeNotAllowedException;
 import com.sammyCatlady42.sudoku42.util.Prime;
 import com.sammyCatlady42.sudoku42.util.Sections;
@@ -11,10 +12,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class MainWindow extends JFrame {
-
-    private JMenuItem fileNewItem;
-    private JMenuItem fileExitItem;
-
     private JPanel sudoku;
     private JPanel buttons;
 
@@ -41,8 +38,8 @@ public class MainWindow extends JFrame {
 
         {
             JMenu menu = new JMenu("File");
-            fileNewItem = new JMenuItem("New");
-            fileExitItem = new JMenuItem("Exit");
+            JMenuItem fileNewItem = new JMenuItem("New");
+            JMenuItem fileExitItem = new JMenuItem("Exit");
 
             menu.add(fileNewItem);
             menu.add(fileExitItem);
@@ -54,7 +51,6 @@ public class MainWindow extends JFrame {
         }
 
         this.setJMenuBar(menuBar);
-        // this.add(sudoku);
 
         this.add(sudoku, BorderLayout.CENTER);
         this.add(buttons, BorderLayout.SOUTH);
@@ -97,11 +93,20 @@ public class MainWindow extends JFrame {
 
                 JTextField cell = new JTextField();
                 cell.setPreferredSize(new Dimension(20, 20));
+
                 cell.addActionListener(new CellListener());
                 cell.addFocusListener(new CellFocusListener());
                 cell.addKeyListener(new CellKeyListener());
+
                 cell.setActionCommand(y + " " + x);
                 cell.setName(y + " " + x);
+
+                int cellValue = Sudoku.getInstance().getGrid().at(y, x).getValue();
+                if (cellValue != 0)
+                    cell.setText(Integer.toString(cellValue));
+
+                cell.setEditable(Sudoku.getInstance().getGrid().at(y, x).isEditable());
+
                 currentSection.add(cell);
             }
         }
@@ -147,8 +152,13 @@ public class MainWindow extends JFrame {
     public class CellKeyListener extends KeyAdapter {
         public void keyPressed(KeyEvent key) {
             JTextField source = ((JTextField)key.getSource());
+
+            int x = Integer.parseInt(source.getName().split(" ")[0]);
+            int y = Integer.parseInt(source.getName().split(" ")[1]);
+
             if (key.getKeyChar() >= '0' && key.getKeyChar() <= '9') {
-                source.setEditable(true);
+                if (Sudoku.getInstance().getGrid().at(y, x).isEditable())
+                    source.setEditable(true);
             } else {
                 source.setEditable(false);
             }

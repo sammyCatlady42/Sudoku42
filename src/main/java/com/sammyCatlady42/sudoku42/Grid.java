@@ -38,6 +38,7 @@ public class Grid {
         for (int x = 0; x < gridSize; x++) {
             for (int y = 0; y < gridSize; y++) {
                 cells[x][y].setValue(filled[x][y]);
+                cells[x][y].setEditable(filled[x][y] == 0);
             }
         }
         cells[0][0].setNote(0,1);
@@ -47,6 +48,10 @@ public class Grid {
 
     public boolean isComplete() {
         return false;
+    }
+
+    public Cell at(int x, int y) {
+        return cells[x][y];
     }
 }
 
