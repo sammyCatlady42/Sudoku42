@@ -10,5 +10,8 @@ public class Grid {
         this.height = height;
         this.cells = new Cell[width][height];
     }
-}
 
+    public boolean isComplete() {
+        return false;
+    }
+}
