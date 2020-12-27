@@ -34,10 +34,4 @@ public class Cell {
     public void setNote(int value, boolean note) {
         this.notes[value - 1] = note;
     }
-
-
-    // 42 haha :D -gitkonflikt
-    public void isComplete() {
-        int a = 1;
-    }
 }

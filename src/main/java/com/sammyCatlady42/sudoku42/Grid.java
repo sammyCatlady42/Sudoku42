@@ -10,5 +10,10 @@ public class Grid {
         this.height = height;
         this.cells = new Cell[width][height];
     }
+
+    // 42 haha :D -gitkonflikt
+    public void isComplete() {
+        int a = 1;
+    }
 }
 
