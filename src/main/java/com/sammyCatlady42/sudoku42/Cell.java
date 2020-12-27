@@ -31,7 +31,7 @@ public class Cell {
         return notes;
     }
 
-    public void setNote(int value, int note) {
-        this.notes[value - 1] = note;
+    public void setNote(int location, int note) {
+        this.notes[location] = note;
     }
 }
