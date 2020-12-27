@@ -3,12 +3,12 @@ package com.sammyCatlady42.sudoku42;
 public class Cell {
     private boolean editable;
     private int value;
-    private boolean[] notes;
+    private int[] notes;
 
     public Cell(boolean editable, int value, int amountNumbers) {
         this.editable = editable;
         this.value = value;
-        this.notes = new boolean[amountNumbers];
+        this.notes = new int[amountNumbers];
     }
 
     public boolean isEditable() {
@@ -27,11 +27,11 @@ public class Cell {
         this.value = value;
     }
 
-    public boolean[] getNotes() {
+    public int[] getNotes() {
         return notes;
     }
 
-    public void setNote(int value, boolean note) {
-        this.notes[value - 1] = note;
+    public void setNote(int location, int note) {
+        this.notes[location] = note;
     }
 }
