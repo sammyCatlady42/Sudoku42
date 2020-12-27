@@ -2,6 +2,8 @@ package com.sammyCatlady42.sudoku42.gui;
 
 import com.sammyCatlady42.sudoku42.exceptions.SizeNotAllowedException;
 import com.sammyCatlady42.sudoku42.util.Prime;
+import com.sammyCatlady42.sudoku42.util.Sections;
+import javafx.util.Pair;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -28,10 +30,6 @@ public class MainWindow extends JFrame {
     }
 
     private MainWindow(int width, int height, int gridSize, boolean show) {
-        if (Prime.isPrimeNumber(gridSize)) {
-            throw new SizeNotAllowedException();
-        }
-
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         this.setLayout(new BorderLayout());
@@ -69,18 +67,10 @@ public class MainWindow extends JFrame {
         this.remove(sudoku);
         this.remove(buttons);
 
-        java.util.List<Integer> primeFactors = Prime.primeFactors(gridSize);
+        Pair<Integer, Integer> sectionSize = Sections.forSize(gridSize);
 
-        while (primeFactors.size() != 2) {
-            Integer num = primeFactors.remove(0);
-            primeFactors.set(0, num * primeFactors.get(0));
-        }
-
-        sectionHeight = primeFactors.get(0);
-        sectionWidth = primeFactors.get(1);
-
-//      sectionHeight = (int) Math.floor(Math.sqrt(gridSize));
-//      sectionWidth = gridSize / sectionHeight;
+        sectionWidth = sectionSize.getKey();
+        sectionHeight = sectionSize.getValue();
 
         int sectionsX = sectionHeight;
         int sectionsY = sectionWidth;
