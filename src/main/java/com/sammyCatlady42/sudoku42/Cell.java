@@ -38,6 +38,6 @@ public class Cell {
 
     // 42 haha :D -gitkonflikt
     public void isComplete() {
-        int a = 0;
+        int a = 1;
     }
 }
