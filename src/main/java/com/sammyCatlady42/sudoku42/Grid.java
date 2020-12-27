@@ -11,9 +11,8 @@ public class Grid {
         this.cells = new Cell[width][height];
     }
 
-    // 42 haha :D -gitkonflikt
-    public void isComplete() {
-        int a = 1;
+    public boolean isComplete() {
+        return false;
     }
 }
 
